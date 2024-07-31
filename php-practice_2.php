@@ -38,6 +38,12 @@ foreach ($personalInfos as $info) {
       echo $info['name'] . 'の電話番号は' . $info['tel'] . 'です。';
       break; 
   }
+↓
+  
+$cPerson = $personalInfos[2]; 
+echo $cPerson['name'] . 'の電話番号は' . $cPerson['tel'] . 'です。';
+
+
 }
 
 2.
@@ -57,7 +63,20 @@ foreach ($personalInfos as $index => &$info) {
 }
 
 var_dump($personalInfos);
+↓
+$ageList = [25, 30, 18];
+$personalInfos = [
+    ['name' => 'Alice'],
+    ['name' => 'Bob'],
+    ['name' => 'Charlie']
+];
 
+foreach ($personalInfos as $index => $info) {
+    // $index に基づいて $ageList から年齢を取得し、'age' キーとして追加
+    $personalInfos[$index]['age'] = $ageList[$index];
+}
+
+var_dump($personalInfos);
 
 // Q3 オブジェクト-1
 
@@ -112,9 +131,7 @@ $ninomiya->attend('PHP');
 
 $currentDate = new DateTime();
 
-$currentDate->modify('-1 month');
-
-echo $currentDate->format('Y-m-d');
+echo (new DateTime())->modify('-1 month')->format('Y-m-d');
 
 2.
 
@@ -122,9 +139,8 @@ $today = new DateTime();
 
 $specifiedDate = new DateTime('1992-04-25');
 
-$interval = $today->diff($specifiedDate);
+$totalDays = $today->diff($specifiedDate)->days;
 
-$totalDays = $interval->days;
 
 echo 'あの日から ' . $totalDays . ' 日経過しました。';
 
